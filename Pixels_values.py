@@ -47,11 +47,13 @@ for filename in directory:
 			# obj_id  represente l'id unique de chaque segment. 
 			obj_id = data[0,0] #
 			#verifier que obj_id n'existe pas dans la liste des segments deja sauvegarde
-			if not(obj_id) in data_container:
+			if not((obj_id,periode) in data_container):
 				#recuperation de l'identifiant du pixel tout en tenant compte de sa date d'acquisition et l'objet auquel il appartient
-				data_container[obj_id,periode]=id
-			#incrementation de la valeur de id 
+				data_container[obj_id,periode]=set()
+			data_container[obj_id,periode].add(id)
+			#incrementation de la valeur de id   136, 'SENTINEL2A_20160804'
 			id+=1
+			print "========"
+			print data_container
 
-	print data_container
 #RQ: a la sortie, l'id de chaque pixel est associe a deux cles que sont son temps d'acquisition et son segement
